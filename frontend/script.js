@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5000/api";
+const API_URL = "https://login-page-p86k.onrender.com/api";
 
 // Simple field validation helpers for login/register forms
 function attachFieldValidation() {
