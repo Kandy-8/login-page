@@ -312,3 +312,123 @@ a {
     font-size: 0.92rem;
   }
 }
+
+/* Dashboard Styles */
+.dashboard-page {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.dashboard-card {
+  background: rgba(15, 23, 42, 0.9);
+  border-radius: 1.5rem;
+  padding: 2.5rem 2.4rem;
+  box-shadow:
+    0 24px 80px rgba(15, 23, 42, 0.9),
+    0 0 0 1px rgba(148, 163, 184, 0.35);
+  backdrop-filter: blur(18px);
+  color: #e5e7eb;
+  animation: cardIn 0.7s ease-out forwards;
+  transform-origin: center;
+}
+
+.dashboard-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.dashboard-title {
+  font-size: clamp(1.8rem, 4vw, 2.2rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.75rem;
+  color: #e5e7eb;
+}
+
+.username-highlight {
+  background: linear-gradient(135deg, #38bdf8, #6366f1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.dashboard-subtitle {
+  font-size: 0.98rem;
+  color: #9ca3af;
+  line-height: 1.6;
+}
+
+.dashboard-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.dashboard-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+}
+
+.stat-card {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 1rem;
+  padding: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(56, 189, 248, 0.2);
+  border-color: rgba(56, 189, 248, 0.4);
+}
+
+.stat-icon {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.stat-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+}
+
+.stat-value {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #38bdf8;
+}
+
+.btn-logout {
+  margin-top: 0.5rem;
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  box-shadow: 0 18px 40px rgba(239, 68, 68, 0.35);
+}
+
+.btn-logout:hover {
+  box-shadow: 0 22px 50px rgba(239, 68, 68, 0.45);
+}
+
+@media (max-width: 600px) {
+  .dashboard-card {
+    padding: 2rem 1.5rem;
+  }
+
+  .dashboard-stats {
+    grid-template-columns: 1fr;
+  }
+}

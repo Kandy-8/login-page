@@ -1,16 +1,55 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dashboard</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
-    <h2>Welcome <span id="username"></span></h2>
-    <button onclick="logout()">Logout</button>
+  <div class="dashboard-page">
+    <div class="dashboard-card">
+      <div class="dashboard-header">
+        <h1 class="dashboard-title">Welcome back, <span id="username" class="username-highlight"></span>!</h1>
+        <p class="dashboard-subtitle">You've successfully logged in to your account.</p>
+      </div>
+
+      <div class="dashboard-content">
+        <div class="dashboard-stats">
+          <div class="stat-card">
+            <div class="stat-icon">👤</div>
+            <div class="stat-info">
+              <div class="stat-label">Account Status</div>
+              <div class="stat-value">Active</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">🔐</div>
+            <div class="stat-info">
+              <div class="stat-label">Session</div>
+              <div class="stat-value">Secure</div>
+            </div>
+          </div>
+        </div>
+
+        <button onclick="logout()" class="btn-primary btn-logout">
+          <span>Logout</span>
+        </button>
+      </div>
+    </div>
   </div>
+
   <script>
-    document.getElementById("username").textContent = localStorage.getItem("username");
+    // Check if user is logged in
+    const token = localStorage.getItem("token");
+    const username = localStorage.getItem("username");
+
+    if (!token || !username) {
+      window.location.href = "index.html";
+    } else {
+      document.getElementById("username").textContent = username;
+    }
+
     function logout() {
       localStorage.clear();
       window.location.href = "index.html";
