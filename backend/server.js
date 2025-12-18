@@ -18,8 +18,8 @@ app.post("/api/register", async (req, res) => {
     const existing = await db.get("SELECT * FROM users WHERE email = ?", [email]);
     if (existing) return res.status(400).json({ error: "Email already exists" });
 
-    //const hashed = await bcrypt.hash(password, 10);
-    await db.run("INSERT INTO users (username, email, password) VALUES (?, ?, ?)", [username, email, password]);
+    const hashed = await bcrypt.hash(password, 10);
+    await db.run("INSERT INTO users (username, email, password) VALUES (?, ?, ?)", [username, email, hashed]);
     res.json({ message: "User registered successfully" });
   } catch (err) {
     console.error(err);
@@ -35,7 +35,7 @@ app.post("/api/login", async (req, res) => {
     const user = await db.get("SELECT * FROM users WHERE email = ?", [email]);
     if (!user) return res.status(400).json({ error: "User not found" });
 
-    const valid = await (password, user.password);
+    const valid = await bcrypt.compare(password, user.password);
     if (!valid) return res.status(400).json({ error: "Invalid password" });
 
     const token = jwt.sign({ id: user.id, username: user.username }, process.env.JWT_SECRET, { expiresIn: "1h" });
@@ -60,4 +60,5 @@ app.get("/api/dashboard", async (req, res) => {
   }
 });
 
-app.listen(process.env.PORT, () => console.log(`🚀 Server running on port ${process.env.PORT}`));
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));

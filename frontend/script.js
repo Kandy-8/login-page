@@ -1,5 +1,36 @@
 const API_URL = "http://localhost:5000/api";
 
+// Simple field validation helpers for login/register forms
+function attachFieldValidation() {
+  const fields = [
+    { input: document.getElementById("email"), error: document.getElementById("email-error"), label: "Email" },
+    { input: document.getElementById("password"), error: document.getElementById("password-error"), label: "Password" }
+  ];
+
+  fields.forEach(({ input, error, label }) => {
+    if (!input || !error) return;
+
+    // Clear error when focusing the field
+    input.addEventListener("focus", () => {
+      error.textContent = "";
+      input.parentElement.classList.remove("field--invalid");
+    });
+
+    // On blur, if empty, show error
+    input.addEventListener("blur", () => {
+      if (!input.value.trim()) {
+        error.textContent = `${label} is required`;
+        input.parentElement.classList.add("field--invalid");
+      } else {
+        error.textContent = "";
+        input.parentElement.classList.remove("field--invalid");
+      }
+    });
+  });
+}
+
+document.addEventListener("DOMContentLoaded", attachFieldValidation);
+
 async function register() {
   const username = document.getElementById("username").value;
   const email = document.getElementById("email").value;
